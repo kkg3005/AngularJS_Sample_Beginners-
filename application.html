@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Form valodation</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+	<script type="text/javascript" src="app.js"></script>
+	<script type="text/javascript" src="controller.js"></script>
+</head>
+
+<body ng-app="myApp" >
+	<div ng-controller="myController" class="container" style="font-family: times New Roman ; text-align: ">
+		<h3 style="color: blue;"> hello ..... you are in <i>{{message}}</i>..... You Access normal Variable</h3>
+		<br>
+		<h3 style="color: blue;">Here we are trying to access an object having multiple property:  is your details:</h3>
+		<p> <b>FullName:{{employee.firstname+" "+employee.lastname}} </b></p>
+		<p> <b>Subject of interest:{{employee.subject}} </b></p>
+		<br>
+		<h3 style="color: blue;">Here we are trying to access an array with multiple object using ng-repeat</h3>
+		<table class="table-bordered" style="margin: 5% ; padding: 2%; text-align: left; font-size: 20px;">
+			<thead>
+				<tr>
+
+					<th>Name</th>
+					<th>Species</th>
+					<th colspan="2" style="text-align: center;">Food Likes</th>
+					<th colspan="2" style="text-align: center;">Food Dislike</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="Pet in mypet" >
+					<td>{{Pet.name}}</td>
+					<td>{{Pet.species}}</td>
+					<td>{{Pet.foods.likes[0]}}</td>
+					<td>{{Pet.foods.likes[1]}}</td>
+					<td>{{Pet.foods.dislikes[0]}}</td>
+					<td>{{Pet.foods.dislikes[1]}}</td>
+				</tr>
+			</tbody>
+		</table>
+
+		<br>
+		<h3 style="color: blue;">Here we are going to display country Object which hold an image object inside It</h3>
+		<div ng-repeat="country in country" style="float: left; position: relative; margin: 5% ; padding: 2%; text-align: center;">
+			<div >
+				Country Name: {{country.name}}
+				<br>
+			</div>
+			<div >
+				Capital Name: {{country.capital}}
+				<br>
+			</div>
+			<div >
+				<img src="{{country.flag}}"
+				alt="{{country.name +'flag'}}"
+				style="height:100px; width:200px" />
+			</div>
+
+		</div>
+		<h4 style="clear: left; color: red;"> <i><b> Using a binding Expression with the img src attribute will couse the 404 error </b> </i></h4>
+		<p style="color: blue"><i style="color: red">reason for the 404 Error</i> As soon as the DOM is persed, an attempt is made to fatch the image from the server.At this point ,AngularJS binding expression that is specified with the src attribute is ot evaluted.Thats why 404 (not found) Error.. to fix this issue we need to use ng-src directive.</p>
+
+		<h3 style="color: blue;">Here we are going to display country Object which hold an image object using <i><b>ng-src</b></i></h3>
+		<div ng-repeat="country in country" style="float: left; position: relative; margin: 5% ; padding: 2%; text-align: center;">
+			<div >
+				Country Name: {{country.name}}
+				<br>
+			</div>
+			<div >
+				Capital Name: {{country.capital}}
+				<br>
+			</div>
+			<div >
+				<img ng-src="{{country.flag}}"
+				alt="{{country.name +'flag'}}"
+				style="height:100px; width:200px" />
+			</div>
+
+		</div>
+		<br>
+		<h3 style="color: blue; clear: left"> Two- way Data-binding</h3>
+		<p>Two-way Binding. Data binding in AngularJS is the synchronization between the model and the view. When data in the model changes, the view reflects the change, and when data in the view changes, the model is updated as well.(if you change in input field it will reflect in ohter expression of same data)</p>
+		<br>
+		<div>
+			Name: <input type="text" ng-model="myName"/>
+		</div>
+		<div>
+			if you chane the input, I am going to change my value: {{myName}}
+		</div>
+		<br>
+		<br>
+		<h3 style="color: blue; clear: left"> Let do somthing with event handling using ng-click directive</h3>
+		<table class="table-bordered" style="margin: 5% ; padding: 2%; text-align: left; font-size: 20px;">
+			<thead>
+				<tr>
+
+					<th>Name</th>
+					<th>Likes</th>
+					<th >Dislikes</th>
+					<th colspan="2" style="text-align: center;">likes/Dislike</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="technology in technologies" >
+					<td>{{technology.Name}}</td>
+					<td>{{technology.Likes}}</td>
+					<td>{{technology.Dislikes}}</td>
+					<td><input type="button" value="Like" ng-click="incrimentLikes(technology)"></td>
+					<td><input type="button" value="Dislike" ng-click="incrimentDislikes(technology)"></td>
+				</tr>
+			</tbody>
+		</table>
+
+	</div>
+
+</body>
+</html>

@@ -1,0 +1,26 @@
+ 
+COMMAND PROMPT
+change directory to ur project
+1. npm install
+2. npm install -g node-windows
+6. /*optional*/
+	npm install http-server-g
+5. npm install express --save
+4. node server.js (your file name)
+ 
+--------------------------------------------------------------------------------------------------
+ 
+3.create server.js file and copy the command and same it at your source folder 
+var port = 85,
+express = require('express'),
+app = express().use(express.static(__dirname + '/')),
+http = require('http').Server(app);
+ 
+app.use('/', function(req, res){
+    res.sendFile(__dirname + '/index.html');
+});
+ 
+http.listen(port, function(){
+    console.log("Node server listening on port " + port);
+});
+ 
